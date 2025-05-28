@@ -4,6 +4,7 @@ import { useChat } from "ai/react";
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { SendHorizonal } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 
 const Chat = () => {
   const { messages, input, handleInputChange, handleSubmit } = useChat({
@@ -34,9 +35,8 @@ const Chat = () => {
         {messages.map((m) => (
           <div
             key={m.id}
-            className={`flex items-start space-x-3 ${
-              m.role === "user" ? "justify-end" : "justify-start"
-            }`}
+            className={`flex items-start space-x-3 ${m.role === "user" ? "justify-end" : "justify-start"
+              }`}
           >
             {m.role === "user" ? null : (
               <Image
@@ -48,13 +48,12 @@ const Chat = () => {
               />
             )}
             <div
-              className={`p-3 rounded-lg max-w-xs text-sm ${
-                m.role === "user"
-                  ? "bg-red-500 text-white"
-                  : "bg-yellow-400 text-black"
-              }`}
+              className={`p-3 rounded-lg max-w-xs text-sm ${m.role === "user"
+                ? "bg-red-500 text-white"
+                : "bg-yellow-400 text-black"
+                }`}
             >
-              {m.content}
+              <ReactMarkdown>{m.content}</ReactMarkdown>
             </div>
             {m.role === "user" ? (
               <Image
